@@ -1,0 +1,15 @@
+@startuml
+
+skin rose
+actor User
+
+User -> [Custom Web Server]
+[Custom Web Server] --> [XPath Execution Module]
+[Custom Web Server] --> [XML Data Repository]
+database "Database"{
+[XML Data Repository] --> [XML Documents]
+[XML Data Repository] --> [XML Schema]
+}
+[Custom Web Server] --> [SAX-like Interface]
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml Decentralized
+
+skin rose
+  [User1] -down-> [P2P Network]
+  [User2] -down-> [P2P Network]
+  [User3] -down-> [P2P Network]
+
+package "Decentralized Search Engine" {
+
+
+package "P2P Network" {
+ [P2P Network] -down-> [Node 1]
+  [P2P Network] -down-> [Node 2]
+   [P2P Network] -down-> [Node N]
+
+[Node 1] -down-> [Decentralized Data Storage]
+[Node 2] -down-> [Decentralized Data Storage]
+[Node N] -down-> [Decentralized Data Storage]
+  [Decentralized Data Storage] --> [Indexed Data1]
+  [Decentralized Data Storage] --> [Indexed Data2]
+  [Decentralized Data Storage] --> [Indexed DataN]
+} 
+}
+@enduml
