@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Search Page</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+       
+      }
+      #search-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        background-color: #f2f2f2;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      
+      #search-input {
+   
+        font-size: 20px;
+        padding: 10px;
+        border: 2px solid #ddd;
+        border-radius: 20px;
+        width: 400px;
+        margin-bottom: 20px;
+      }
+
+      #search-button {
+        
+        background-color: #fff;
+        border: none;
+        border-radius: 50%;
+        height: 60px;
+        width: 60px;
+        margin-left: 20px;
+        margin-bottom: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+      }
+      #search-button:hover {
+        background-color: #bbbaba;
+      }
+
+      #search-button img {
+        height: 40px;
+        width: 40px;
+      }
+
+     
+      #content {
+        margin-top: 70px;
+        padding: 20px;
+        box-sizing: border-box;
+      }
+      .search-result {
+        margin-top: 40px;
+        margin-bottom: 20px;
+      }
+      .search-result a {
+        color: #0400ff;
+        font-size: 25px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .search-result a:hover {
+        text-decoration: underline;
+      }
+      .search-result h2 {
+        color: #000000;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+      .tcd {
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        right: 50px;
+        top:10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="search-container">
+      
+      <input type="text" id="search-input" placeholder="Search...">
+      <img class="tcd" src="https://www.qualiaanalytics.org//app/uploads/2018/07/TrinityCD.png">
+      <button id="search-button"><img src="https://cdn-icons-png.flaticon.com/512/122/122932.png" alt="Search Icon"></button>
+    </div>
+    <div id="content"></div>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <script>
+      const contentContainer = document.getElementById("content");
+      const searchButton = document.getElementById("search-button");
+      const searchInput = document.getElementById("search-input");
+    
+    
+      let currentQuery;
+      const searchQuery = searchInput.value;
+      // Listen for messages from the server
+    
+
+      searchButton.addEventListener("click", () => {
+flag=false;
+
+        const searchQuery = searchInput.value;
+        currentQuery = searchQuery;
+        fetch(`/deposit/${searchQuery}`)
+          .then(response => response.json())
+          .then(jsonData => {
+            console.log(jsonData);});
+if(flag==false){
+ 
+      contentContainer.innerHTML = "";
+    
+}
+   
+      fetch(`/update/${searchQuery}`)
+          .then(response => response.json())
+          .then(jsonData => {
+            
+            console.log(jsonData);
+        const dat =jsonData;
+       
+            
+      console.log(dat);
+        const results = JSON.parse(dat["results"]);
+        var flag =false;
+        console.log(results)
+  
+          
+          contentContainer.innerHTML = "";
+          results.forEach((result) => {
+            const link = document.createElement("a");
+            link.href = result.url;
+            link.textContent = result.title;
+            const heading = document.createElement("h2");
+            heading.textContent = result.snippet;
+            const container = document.createElement("div");
+            container.classList.add("search-result");
+            container.appendChild(link);
+            container.appendChild(heading);
+            contentContainer.appendChild(container);
+              flag=true;
+          });
+        }
+      );
+       } );
+    </script>
+  </body>
+</html>
+  </body>
+</html>
