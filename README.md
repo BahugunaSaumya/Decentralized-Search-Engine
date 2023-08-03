@@ -14,20 +14,33 @@ The decentralized search engine addresses the concerns of data collection and ma
 
 ## Setup and Running the Project
 
+#### Python Dependencies
+Install the required Python libraries by running the following command:
+
+```
+pip install -r requirements.txt
+```
+Node.js Dependencies
+Create a package.json file by running:
+```
+npm init
+npm install web3 express
+```
 ### Installation
 Please ensure the following dependencies are installed:
 - Node.js
 - npm
 - Geth
-- Python
+- web3.js
+- Solidity
 - GunDB
 
 ### Starting the Geth Node
 Start the Geth node by running the following command:
 
-\`\`\`
+```
 geth --port 3000 --networkid 58343 --datadir=./blkchain --maxpeers=5  --ws --ws.port 8543 --ws.addr 127.0.0.1 --ws.origins "*" --ws.api "eth,net,web3,clef,personal,miner" --http --http.port 8543 --http.addr 127.0.0.1 --http.corsdomain "*" --http.api "eth,net,web3,clef,personal,miner" --mine --miner.etherbase=0xab5F9830f4295b5D3523f93F635842A54d0AB284 --nat extip:10.10.15.162  --allow-insecure-unlock  console 2>>eth.log  
-\`\`\`
+```
 
 ### Running the Server
 1. Run \`Main.js\`.
